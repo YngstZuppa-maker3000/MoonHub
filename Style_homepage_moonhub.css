@@ -51,13 +51,14 @@ body {
 }
 
 #title_logo_zone {
-    background-color: #15023a;
+    background-color: #31023a;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 30px 0;
     width: 100%;
+    height: 180px;
     gap: 20px;
     border-bottom: 2px solid #bc13fe;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -69,6 +70,7 @@ body {
     border-radius: 50%;
     border: 2px solid #bc13fe;
     animation: pulsate-img 1.5s infinite alternate;
+
 }
 
 #title_moonhub {
@@ -76,7 +78,7 @@ body {
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 4px;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     animation: pulsate 1.5s infinite alternate;
 }
 
