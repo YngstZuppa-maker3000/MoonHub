@@ -19,6 +19,7 @@ body {
             0 0 100px #bc13fe,
             0 0 150px #bc13fe;
     }
+
     0% {
         text-shadow:
             0 0 2px #fff,
@@ -31,25 +32,45 @@ body {
             0 0 80px #bc13fe;
     }
 }
+
+@keyframes pulsate-img {
+    100% {
+        box-shadow:
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 25px #bc13fe,
+            0 0 45px #bc13fe;
+    }
+
+    0% {
+        box-shadow:
+            0 0 2px #fff,
+            0 0 5px #bc13fe,
+            0 0 15px #bc13fe;
+    }
+}
+
 #title_logo_zone {
     background-color: #15023a;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
-    align-items: center;    
+    justify-content: center;
+    align-items: center;
     padding: 30px 0;
     width: 100%;
     gap: 20px;
     border-bottom: 2px solid #bc13fe;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
+
 #img_logo {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    box-shadow: 0 0 15px #bc13fe;
     border: 2px solid #bc13fe;
+    animation: pulsate-img 1.5s infinite alternate;
 }
+
 #title_moonhub {
     font-family: 'Orbitron', sans-serif;
     color: #fff;
@@ -57,4 +78,15 @@ body {
     letter-spacing: 4px;
     font-size: 2.2rem;
     animation: pulsate 1.5s infinite alternate;
+}
+
+#main_content {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
