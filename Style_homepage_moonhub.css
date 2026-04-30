@@ -32,14 +32,16 @@ body {
     }
 }
 #title_logo_zone {
-    background-color: transparent;
+    background-color: #15023a;
     display: flex;
     flex-direction: column;
     justify-content: center; 
     align-items: center;    
-    padding: 40px 0;
+    padding: 30px 0;
     width: 100%;
     gap: 20px;
+    border-bottom: 2px solid #bc13fe;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 #img_logo {
     width: 120px;
