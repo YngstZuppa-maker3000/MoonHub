@@ -1,0 +1,21 @@
+body {
+    background-color: rgb(26, 1, 96);
+    position: relative;
+}
+#title_logo_zone {
+    background-color: rgb(101, 3, 101);
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    height: 300px;           
+    border: 1px solid black; 
+}
+#img_logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+#title_moonhub {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+}
