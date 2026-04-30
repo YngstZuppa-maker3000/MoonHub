@@ -1,21 +1,58 @@
 body {
-    background-color: rgb(26, 1, 96);
-    position: relative;
+    background: radial-gradient(circle at center, #1a0160 0%, #0a012a 100%);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+@keyframes pulsate {
+    100% {
+        text-shadow:
+            0 0 4px #fff,
+            0 0 11px #fff,
+            0 0 19px #fff,
+            0 0 40px #bc13fe,
+            0 0 80px #bc13fe,
+            0 0 90px #bc13fe,
+            0 0 100px #bc13fe,
+            0 0 150px #bc13fe;
+    }
+    0% {
+        text-shadow:
+            0 0 2px #fff,
+            0 0 4px #fff,
+            0 0 6px #fff,
+            0 0 10px #bc13fe,
+            0 0 45px #bc13fe,
+            0 0 55px #bc13fe,
+            0 0 70px #bc13fe,
+            0 0 80px #bc13fe;
+    }
 }
 #title_logo_zone {
-    background-color: rgb(101, 3, 101);
+    background-color: transparent;
     display: flex;
+    flex-direction: column;
     justify-content: center; 
     align-items: center;    
-    height: 300px;           
-    border: 1px solid black; 
+    padding: 40px 0;
+    width: 100%;
+    gap: 20px;
 }
 #img_logo {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
+    box-shadow: 0 0 15px #bc13fe;
+    border: 2px solid #bc13fe;
 }
 #title_moonhub {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: white;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 2.2rem;
+    animation: pulsate 1.5s infinite alternate;
 }
