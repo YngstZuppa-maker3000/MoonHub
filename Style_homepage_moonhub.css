@@ -169,6 +169,26 @@ body {
     flex-direction: column;
     justify-content: center;
 }
+
+/*da controllare: */
+.contenitore {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+}
+
+.Box_Select_typeGame {
+padding: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  min-height: 10px;
+}
+
+.Box1 { background-color: #ffcccc; }
+.Box2 { background-color: #ccffcc; }
+.Box3 { background-color: #ccccff; }
+/* */
+
 .Game_zone {
     background-color: #ffffff;
     width: 150px;
