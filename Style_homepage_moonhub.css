@@ -170,24 +170,51 @@ body {
     justify-content: center;
 }
 
-/*da controllare: */
 .contenitore {
-    display: grid;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
     grid-template-columns: repeat(3, 1fr); 
-    gap: 10px;
+    gap: 150px; 
 }
 
 .Box_Select_typeGame {
-padding: 20px;
-  text-align: center;
-  border: 1px solid #ccc;
-  min-height: 10px;
+    padding-top: 20px;
+    text-align: center;
+    min-height: 10px;
+    width: 400px;
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: #1a0160;
+    border: 2px solid #bc13fe;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    animation: pulsate 1.5s infinite alternate;
 }
 
-.Box1 { background-color: #ffcccc; }
-.Box2 { background-color: #ccffcc; }
-.Box3 { background-color: #ccccff; }
-/* */
+.Img_Select_typeGame {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid #bc13fe;
+    animation: pulsate-img 1.5s infinite alternate;
+}
+
+.Buttons {
+    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    background-color: #04000f;
+    border: 2px solid #bc13fe;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    animation: pulsate 1.5s infinite alternate;
 
 .Game_zone {
     background-color: #ffffff;
