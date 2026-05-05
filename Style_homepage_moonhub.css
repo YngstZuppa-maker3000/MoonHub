@@ -47,8 +47,8 @@ body {
     font-family: 'Orbitron', sans-serif;
     color: #fff;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.9rem;
+    letter-spacing: 7px;
+    font-size: 1.7rem;
     animation: pulsate 1.5s infinite alternate;
     cursor: pointer;
     position: relative;
