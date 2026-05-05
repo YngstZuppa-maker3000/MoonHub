@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <g id="controller">
+      <!-- Controller Body -->
+      <path d="M90 190 C90 140, 310 140, 310 190 C310 240, 350 280, 350 320 C350 360, 310 370, 280 320 C270 290, 130 290, 120 320 C90 370, 50 360, 50 320 C50 280, 90 240, 90 190 Z" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- D-pad -->
+      <path d="M110 215 h-20 v25 h20 v20 h25 v-20 h20 v-25 h-20 v-20 h-25 v20 Z" stroke-width="8" stroke-linejoin="round" fill="none"/>
+      <!-- Buttons -->
+      <circle cx="250" cy="240" r="14" stroke-width="8" fill="none"/>
+      <circle cx="285" cy="205" r="14" stroke-width="8" fill="none"/>
+    </g>
+  </defs>
+  
+  <g filter="url(#neonGlow)" transform="translate(15, 20)">
+    <!-- Controller 2 (Cyan - back) -->
+    <use href="#controller" fill="#1a0160" stroke="#00ffff" transform="translate(100, -30) scale(0.75) rotate(15 200 250)"/>
+    <!-- Controller 1 (Magenta - front) -->
+    <use href="#controller" fill="#1a0160" stroke="#bc13fe" transform="translate(-10, 40) scale(0.75) rotate(-15 200 250)"/>
+  </g>
+</svg>

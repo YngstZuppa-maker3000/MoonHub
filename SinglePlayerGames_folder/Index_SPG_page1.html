@@ -10,15 +10,33 @@
     <title>MOONHUB - SinglePlayer</title>
 </head>
 <body>
+    <div id="sideMenu" class="side-menu">
+        <button id="closeMenuBtn" class="close-btn">&times;</button>
+        <a href="./../Index_homepage_moonhub.html" class="menu-link">Home</a>
+        <a href="./../TwoPlayerGames_folder/Index_TPG_page1.html" class="menu-link">Two Players Games</a>
+        <a href="./../RandomGames_folder/Index_RG.html" class="menu-link">Random Games</a>
+    </div>
+    <div id="menuOverlay" class="menu-overlay"></div>
+
     <div class="movement_section_zone">
         <div class="cloud cloud-1"></div>
         <div class="cloud cloud-2"></div>
         <div class="cloud cloud-3"></div>
         <div class="cloud cloud-4"></div>
         <div class="cloud cloud-5"></div>
+        
+        <!-- Nuvole vettoriali sparse a sinistra -->
+        <img class="vector-cloud vc-l1" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-l2" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-l3" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
         <button id="btnMovementSPG" class="ButtonsMovement"> ||| </button>
         <h1 id="title_moonhub">MOONHUB</h1>
         <img class="img_logo_movement" src="./../assets/Images/Logo_moonhub.jpg" alt="Logo_moonhub">
+        
+        <!-- Nuvole vettoriali sparse a destra -->
+        <img class="vector-cloud vc-r1" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-r2" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-r3" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
     </div>
 
     <div class="GameList_zone">
@@ -45,5 +63,6 @@
         <div class="cloud cloud-4"></div>
         <div class="cloud cloud-5"></div>
     </div>
+    <script src="./../Script_homepage_moonhub.js"></script>
 </body>
 </html>
