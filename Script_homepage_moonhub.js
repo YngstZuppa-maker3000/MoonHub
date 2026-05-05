@@ -1,3 +1,4 @@
+//Buttons homepage
 const btnRandom = document.getElementById("btnRandomGames");
 const btnSinglePlayer = document.getElementById("btnSinglePlayerGames");
 const btnTwoPlayers = document.getElementById("btnTwoPlayerGames");
@@ -10,4 +11,19 @@ btnSinglePlayer.addEventListener('click', function() {
 });
 btnTwoPlayers.addEventListener('click', function() {
     window.location.href = "./TwoPlayerGames_folder/Index_TPG_page1.html";
+});
+
+//Button Movement section
+const btnMoveRG = document.getElementById("btnMovementRG");
+const btnMoveSPG= document.getElementById("btnMovementSPG");
+const btnMoveTPG= document.getElementById("btnMovementTPG");
+
+btnMoveRG.addEventListener('click', function() {
+
+});
+btnMoveSPG.addEventListener('click', function() {
+
+});
+btnMoveTPG.addEventListener('click', function() {
+
 });
