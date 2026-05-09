@@ -16,7 +16,7 @@ check the profile described below:
 particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 80, // Numero di particelle
+      "value": 50, // Numero di particelle
       "density": {
         "enable": true,
         "value_area": 800
@@ -37,11 +37,7 @@ particlesJS("particles-js", {
       "random": true
     },
     "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#bc13fe",
-      "opacity": 0.4,
-      "width": 1
+      "enable": false
     },
     "move": {
       "enable": true,
@@ -67,5 +63,5 @@ particlesJS("particles-js", {
       "resize": true
     }
   },
-  "retina_detect": true
+  "retina_detect": false
 });

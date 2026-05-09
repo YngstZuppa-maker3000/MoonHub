@@ -53,3 +53,58 @@ if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleSideMenu);
 
 const menuOverlay = document.getElementById("menuOverlay");
 if (menuOverlay) menuOverlay.addEventListener('click', toggleSideMenu);
+
+// ── Star Rating ──────────────────────────────────────────────
+const stars = document.querySelectorAll('.star');
+let currentRating = 0;
+
+function setStars(value, mode) {
+    stars.forEach(s => {
+        const v = parseInt(s.dataset.value);
+        s.classList.remove('active', 'hovered');
+        if (mode === 'hover') {
+            if (v <= value) s.classList.add('hovered');
+        } else {
+            if (v <= value) s.classList.add('active');
+        }
+    });
+}
+
+stars.forEach(star => {
+    star.addEventListener('mouseenter', () => setStars(parseInt(star.dataset.value), 'hover'));
+    star.addEventListener('mouseleave', () => setStars(currentRating, 'select'));
+    star.addEventListener('click', () => {
+        currentRating = parseInt(star.dataset.value);
+        setStars(currentRating, 'select');
+    });
+});
+
+// ── Send Review ───────────────────────────────────────────────
+const btnSendReview = document.getElementById('btnSendReview');
+const reviewNote = document.getElementById('reviewNote');
+
+if (btnSendReview) {
+    btnSendReview.addEventListener('click', () => {
+        if (currentRating === 0) {
+            reviewNote.style.borderColor = '#ff4444';
+            reviewNote.placeholder = 'Select at least one star!';
+            setTimeout(() => {
+                reviewNote.style.borderColor = '#bc13fe';
+                reviewNote.placeholder = 'Add a note...';
+            }, 2000);
+            return;
+        }
+        const note = reviewNote.value.trim();
+        const rating = '★'.repeat(currentRating) + '☆'.repeat(5 - currentRating);
+        const subject = encodeURIComponent(`MoonHub Review - ${rating}`);
+        const body = encodeURIComponent(
+            `Rating: ${rating}\n` +
+            (note ? `Note: ${note}\n` : '') +
+            `\n— Sent from MoonHub`
+        );
+        window.open(`https://mail.google.com/mail/?view=cm&to=lazuppabagnata68@gmail.com&su=${subject}&body=${body}`, '_blank');
+        currentRating = 0;
+        setStars(0, 'select');
+        reviewNote.value = '';
+    });
+}

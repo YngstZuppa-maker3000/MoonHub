@@ -31,10 +31,10 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     position: relative;
     display: flex;
-    justify-content: center; 
-    align-items: center;     
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 350px; 
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 350px;
     overflow: hidden;
 }
 
@@ -53,6 +53,7 @@ body {
     cursor: pointer;
     position: relative;
     z-index: 10;
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
 }
 
 .img_logo_movement {
@@ -61,10 +62,11 @@ body {
     border-radius: 50%;
     border: 2px solid #bc13fe;
     animation: pulsate-img 1.5s infinite alternate;
-
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 25px #bc13fe, 0 0 45px #bc13fe;
 }
 
-#img_logo, #title_moonhub {
+#img_logo,
+#title_moonhub {
     position: relative;
     z-index: 1;
 }
@@ -75,7 +77,7 @@ body {
     border-radius: 50%;
     border: 2px solid #bc13fe;
     animation: pulsate-img 1.5s infinite alternate;
-
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 25px #bc13fe, 0 0 45px #bc13fe;
 }
 
 #title_moonhub {
@@ -85,24 +87,28 @@ body {
     letter-spacing: 3px;
     font-size: 1.3rem;
     animation: pulsate 1.5s infinite alternate;
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe, 0 0 90px #bc13fe;
 }
+
 .GameList_zone {
     background-color: transparent;
     width: 100%;
-    height: 500px;
+    height: auto;
+    min-height: 320px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
     position: relative;
     z-index: 1;
+    padding: 30px 0;
 }
 
 .contenitore {
     display: flex;
-    justify-content: center; 
-    align-items: center;     
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 150px; 
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 150px;
     position: relative;
     z-index: 10;
 }
@@ -123,9 +129,10 @@ body {
     letter-spacing: 3px;
     font-size: 0.9rem;
     animation: pulsate 1.5s infinite alternate;
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
 }
 
-.Box_Select_typeGame > *:not(.cloud) {
+.Box_Select_typeGame>*:not(.cloud) {
     position: relative;
     z-index: 10;
 }
@@ -136,6 +143,7 @@ body {
     border-radius: 50%;
     border: 2px solid #bc13fe;
     animation: pulsate-img 1.5s infinite alternate;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 25px #bc13fe, 0 0 45px #bc13fe;
 }
 
 .Buttons {
@@ -150,6 +158,7 @@ body {
     letter-spacing: 3px;
     font-size: 0.9rem;
     animation: pulsate 1.5s infinite alternate;
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
 }
 
 .Game_zone {
@@ -161,6 +170,17 @@ body {
     border: 5px, solid, black;
     border-radius: 20px;
 }
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 150px);
+    gap: 20px;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    z-index: 10;
+}
+
 .PageList_zone {
     background-color: #07001e;
     display: flex;
@@ -184,10 +204,10 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px 0;
+    padding: 18px 0;
     width: 100%;
-    height: 250px;
-    gap: 20px;
+    min-height: 210px;
+    height: auto;
     border-top: 2px solid #bc13fe;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     position: relative;
@@ -196,54 +216,158 @@ body {
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 3px;
+    font-size: 0.62rem;
+}
+
+/* Layout interno a due colonne */
+.info-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 90%;
+    max-width: 1100px;
+    position: relative;
+    z-index: 10;
+}
+
+.info-contacts {
+    flex: 1;
+    padding: 0 24px;
+    text-align: left;
+}
+
+.info-contacts a {
+    color: #bc13fe;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.info-contacts a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #bc13fe;
+}
+
+/* Bordo verticale separatore */
+.info-divider {
+    width: 2px;
+    align-self: stretch;
+    background: linear-gradient(to bottom, transparent, #bc13fe, transparent);
+    box-shadow: 0 0 10px #bc13fe, 0 0 20px #bc13fe;
+    flex-shrink: 0;
+}
+
+/* Colonna recensione */
+.info-review {
+    flex: 1;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.review-title {
+    margin: 0;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-shadow: 0 0 8px #bc13fe;
+}
+
+/* Stelle */
+.stars {
+    display: flex;
+    gap: 10px;
+}
+
+.star {
+    font-size: 2rem;
+    color: #3a0060;
+    cursor: pointer;
+    transition: color 0.2s, text-shadow 0.2s, transform 0.15s;
+    text-shadow: none;
+    user-select: none;
+}
+
+.star.active,
+.star.hovered {
+    color: #bc13fe;
+    text-shadow: 0 0 6px #fff, 0 0 14px #bc13fe, 0 0 30px #bc13fe;
+    transform: scale(1.2);
+}
+
+/* Textarea */
+.review-textarea {
+    width: 100%;
+    max-width: 280px;
+    height: 56px;
+    background-color: #0d0030;
+    border: 2px solid #bc13fe;
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    padding: 8px 12px;
+    resize: none;
+    outline: none;
+    transition: box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+.review-textarea::placeholder {
+    color: rgba(188, 19, 254, 0.5);
+    text-transform: uppercase;
+}
+
+.review-textarea:focus {
+    box-shadow: 0 0 10px #bc13fe, 0 0 20px #bc13fe;
+}
+
+/* Bottone invia */
+.review-send-btn {
+    background-color: #04000f;
+    border: 2px solid #bc13fe;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
     font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: box-shadow 0.3s, background-color 0.3s;
+    text-shadow: 0 0 4px #fff, 0 0 10px #bc13fe;
+}
+
+.review-send-btn:hover {
+    background-color: #1a0160;
+    box-shadow: 0 0 12px #bc13fe, 0 0 24px #bc13fe;
 }
 
 
 @keyframes pulsate {
-    100% {
-        text-shadow:
-            0 0 4px #fff,
-            0 0 11px #fff,
-            0 0 19px #fff,
-            0 0 40px #bc13fe,
-            0 0 80px #bc13fe,
-            0 0 90px #bc13fe,
-            0 0 100px #bc13fe,
-            0 0 150px #bc13fe;
+    0% {
+        opacity: 0.78;
     }
 
-    0% {
-        text-shadow:
-            0 0 2px #fff,
-            0 0 4px #fff,
-            0 0 6px #fff,
-            0 0 10px #bc13fe,
-            0 0 45px #bc13fe,
-            0 0 55px #bc13fe,
-            0 0 70px #bc13fe,
-            0 0 80px #bc13fe;
+    100% {
+        opacity: 1;
     }
 }
 
 @keyframes pulsate-img {
-    100% {
-        box-shadow:
-            0 0 5px #fff,
-            0 0 10px #fff,
-            0 0 25px #bc13fe,
-            0 0 45px #bc13fe;
+    0% {
+        opacity: 0.75;
     }
 
-    0% {
-        box-shadow:
-            0 0 2px #fff,
-            0 0 5px #bc13fe,
-            0 0 15px #bc13fe;
+    100% {
+        opacity: 1;
     }
 }
 
-#particles-js {    
+#particles-js {
     position: absolute;
     top: 0;
     left: 0;
@@ -251,6 +375,7 @@ body {
     height: 100%;
     z-index: -1;
 }
+
 #particles-js canvas {
     filter: drop-shadow(0 0 5px #bc13fe) drop-shadow(0 0 15px #bc13fe);
 }
@@ -262,6 +387,7 @@ body {
     filter: blur(50px);
     z-index: 0;
     animation: moveClouds 20s infinite alternate ease-in-out;
+    will-change: transform;
 }
 
 .cloud-1 {
@@ -308,8 +434,13 @@ body {
 }
 
 @keyframes moveClouds {
-    0% { transform: translate(-20px, -20px) scale(1); }
-    100% { transform: translate(40px, 20px) scale(1.3); }
+    0% {
+        transform: translate(-20px, -20px) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, 20px) scale(1.3);
+    }
 }
 
 /* Side Menu Styles */
@@ -391,11 +522,12 @@ body {
 }
 
 @keyframes pulsate-svg {
-    100% {
-        filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px #bc13fe) drop-shadow(0 0 25px #bc13fe);
-    }
     0% {
-        filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px #bc13fe);
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0.85;
     }
 }
 
@@ -404,6 +536,7 @@ body {
     animation: pulsate-svg 1.5s infinite alternate;
     z-index: 5;
     opacity: 0.8;
+    filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px #bc13fe) drop-shadow(0 0 20px #bc13fe);
 }
 
 .vc-l1 {
