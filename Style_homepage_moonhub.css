@@ -193,7 +193,7 @@ body {
     box-sizing: border-box;
 }
 
-.Game_zone > *:not(.cloud) {
+.Game_zone>*:not(.cloud) {
     position: relative;
     z-index: 10;
 }
@@ -292,7 +292,108 @@ body {
     box-shadow: inset 0 0 5px #bc13fe;
 }
 
+.RandomGame_grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 1200px;
+}
 
+.randomGame_borderZone, #RandomGame_zone {
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #1a0160;
+    position: relative;
+    border: 2px solid #bc13fe;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: pulsate 1.5s infinite alternate;
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
+    box-sizing: border-box;
+    height: 450px;
+}
+
+.randomGame_borderZone {
+    width: 250px;
+    display: flex;
+    background-color: transparent;
+    border: none;
+    animation: none;
+    text-shadow: none;
+}
+
+/* Left zone button positioning */
+.randomGame_borderZone:first-child {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 25px;
+}
+
+/* Right zone button positioning */
+.randomGame_borderZone:last-child {
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 25px;
+}
+
+#RandomGame_zone {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#RandomGame_zone img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid #bc13fe;
+}
+
+/* Button styles for Random Games */
+#like-btn, #dislike-btn, #nextgame-btn {
+    background-color: #04000f;
+    border: 2px solid #bc13fe;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    animation: pulsate 1.5s infinite alternate;
+    text-shadow: 0 0 4px #fff, 0 0 10px #bc13fe;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    box-shadow: 0 0 5px #bc13fe;
+}
+
+#like-btn:hover, #dislike-btn:hover, #nextgame-btn:hover {
+    background-color: #1a0160;
+    box-shadow: 0 0 15px #bc13fe, 0 0 30px #bc13fe;
+    transform: scale(1.1);
+}
+
+#like-btn, #dislike-btn {
+    width: 80px; /* 1/5 of 400px */
+    height: 80px;
+    margin: 15px 0;
+    font-size: 1.8rem;
+}
+
+#nextgame-btn {
+    width: 100px; /* 1/4 of 400px */
+    height: 100px;
+    font-size: 2.5rem;
+}
 
 .Info_zone {
     background-color: #04000f;

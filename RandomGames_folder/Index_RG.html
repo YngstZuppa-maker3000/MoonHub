@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="./../Style_homepage_moonhub.css">
     <title>MOONHUB - Random Games</title>
 </head>
+
 <body>
     <div id="sideMenu" class="side-menu">
         <button id="closeMenuBtn" class="close-btn">&times;</button>
@@ -22,7 +24,7 @@
         <div class="cloud cloud-3"></div>
         <div class="cloud cloud-4"></div>
         <div class="cloud cloud-5"></div>
-        
+
         <!-- Nuvole vettoriali sparse a sinistra -->
         <img class="vector-cloud vc-l1" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
         <img class="vector-cloud vc-l2" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
@@ -30,7 +32,7 @@
         <button id="btnMovementRG" class="ButtonsMovement"> ||| </button>
         <h1 id="title_moonhub">MOONHUB</h1>
         <img class="img_logo_movement" src="./../assets/Images/Logo_moonhub.jpg" alt="Logo_moonhub">
-        
+
         <!-- Nuvole vettoriali sparse a destra -->
         <img class="vector-cloud vc-r1" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
         <img class="vector-cloud vc-r2" src="./../assets/Images/NeonCloud.svg" alt="Cloud">
@@ -40,9 +42,23 @@
     <div class="GameList_zone">
         <div class="cloud cloud-1"></div>
         <div class="cloud cloud-2"></div>
-        <div class="cloud cloud-3"></div>
-        <div class="cloud cloud-4"></div>
-        <div class="cloud cloud-5"></div>
+
+        <div class="RandomGame_grid">
+
+            <div class="randomGame_borderZone">
+                <button id="like-btn">👍</button>
+                <button id="dislike-btn">👎</button>
+            </div>
+
+            <div id="RandomGame_zone">
+                <img src="./../assets/Images/imgComingSoon.jpg" alt="coming soon">
+            </div>
+
+            <div class="randomGame_borderZone">
+                <button id="nextgame-btn">⬇️</button>
+            </div>
+        </div>
+
     </div>
 
     <div class="Info_zone">
@@ -57,14 +73,16 @@
                     <li>
                         Yngst_thaZuppa:
                         <ul>
-                            <li>Email: <a href="https://mail.google.com/mail/?view=cm&to=lazuppabagnata68@gmail.com" target="_blank" rel="noopener noreferrer">lazuppabagnata68@gmail.com</a></li>
+                            <li>Email: <a href="https://mail.google.com/mail/?view=cm&to=lazuppabagnata68@gmail.com"
+                                    target="_blank" rel="noopener noreferrer">lazuppabagnata68@gmail.com</a></li>
                             <li>GitHub: <a href="https://github.com/YngstZuppa-maker3000">YngstZuppa-maker3000</a></li>
                         </ul>
                     </li>
                     <li>
                         Elvettorato:
                         <ul>
-                            <li>Email: <a href="https://mail.google.com/mail/?view=cm&to=gabrlgithub.xda@gmail.com" target="_blank" rel="noopener noreferrer">gabrlgithub.xda@gmail.com</a></li>
+                            <li>Email: <a href="https://mail.google.com/mail/?view=cm&to=gabrlgithub.xda@gmail.com"
+                                    target="_blank" rel="noopener noreferrer">gabrlgithub.xda@gmail.com</a></li>
                             <li>GitHub: <a href="https://github.com/Elvettorato">Elvettorato</a></li>
                         </ul>
                     </li>
@@ -92,4 +110,5 @@
 
     <script src="./../Script_homepage_moonhub.js"></script>
 </body>
+
 </html>
