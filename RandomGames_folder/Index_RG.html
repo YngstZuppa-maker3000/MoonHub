@@ -7,6 +7,155 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./../Style_homepage_moonhub.css">
     <title>MOONHUB - Random Games</title>
+    <style>
+        .RandomGame_grid {
+            gap: 20px;
+        }
+
+        .randomGame_borderZone:first-child {
+            padding-right: 0;
+        }
+
+        .randomGame_borderZone:last-child {
+            padding: 0;
+        }
+
+        .dice-row {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 20px 0;
+        }
+
+        .dice-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dice-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            opacity: 0.8;
+        }
+
+        .dice {
+            font-size: 80px;
+            width: 110px;
+            height: 110px;
+            line-height: 110px;
+            background: radial-gradient(circle at 35% 35%, #0d0030, #04000f);
+            color: #fff;
+            border-radius: 18px;
+            box-shadow: 0 0 8px #bc13fe, 0 0 25px #bc13fe, inset 0 0 20px rgba(188, 19, 254, 0.15);
+            transition: transform 0.1s;
+            user-select: none;
+            border: 2px solid #bc13fe;
+            text-shadow: 0 0 6px #fff, 0 0 15px #bc13fe;
+            animation: pulsate 1.5s infinite alternate;
+        }
+
+        @keyframes roll {
+            0% { transform: rotate(0deg) scale(1); }
+            20% { transform: rotate(-20deg) scale(1.2); }
+            40% { transform: rotate(380deg) scale(0.8); }
+            60% { transform: rotate(700deg) scale(1.1); }
+            80% { transform: rotate(740deg) scale(0.95); }
+            100% { transform: rotate(720deg) scale(1); }
+        }
+
+        .is-rolling {
+            animation: roll 1s ease-in-out;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-container button {
+            padding: 12px 24px;
+            font-size: 0.7rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border: 2px solid #bc13fe;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+            max-width: 140px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        #rollBtn {
+            background-color: #04000f;
+            color: #fff;
+            text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
+            animation: pulsate 1.5s infinite alternate;
+        }
+
+        #rollBtn:hover:not(:disabled) {
+            background-color: #1a0160;
+            box-shadow: 0 0 12px #bc13fe, 0 0 24px #bc13fe;
+        }
+
+        #resetBtn {
+            background-color: #04000f;
+            color: #fff;
+            text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
+            animation: pulsate 1.5s infinite alternate;
+        }
+
+        #resetBtn:hover:not(:disabled) {
+            background-color: #1a0160;
+            box-shadow: 0 0 12px #bc13fe, 0 0 24px #bc13fe;
+        }
+
+        .btn-container button:active:not(:disabled) {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .btn-container button:disabled {
+            background-color: #333 !important;
+            border-color: #555 !important;
+            box-shadow: none !important;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transform: none !important;
+            animation: none !important;
+            text-shadow: none !important;
+        }
+
+        .dice-scoreboard {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #bc13fe;
+        }
+
+        .dice-scoreboard span {
+            font-size: 1.1rem;
+            color: #bc13fe;
+            text-shadow: 0 0 4px #fff, 0 0 11px #bc13fe;
+        }
+
+        #RandomGame_zone {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 480px;
+            height: 480px;
+        }
+    </style>
 </head>
 
 <body>
@@ -51,7 +200,27 @@
             </div>
 
             <div id="RandomGame_zone">
-                <img src="./../assets/Images/imgComingSoon.jpg" alt="coming soon">
+                <h1 style="margin:0;font-size:1.3rem;letter-spacing:5px;text-shadow:0 0 4px #fff,0 0 11px #fff,0 0 40px #bc13fe,0 0 80px #bc13fe;">Throw the dice!</h1>
+
+                <div class="dice-row">
+                    <div class="dice-wrapper">
+                        <span class="dice-label">Dice 1</span>
+                        <div id="dice1" class="dice">⚀</div>
+                    </div>
+                    <div class="dice-wrapper">
+                        <span class="dice-label">Dice 2</span>
+                        <div id="dice2" class="dice">⚀</div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button id="rollBtn" onclick="rollDice()">Lancia</button>
+                    <button id="resetBtn" onclick="resetGame()">Reset</button>
+                </div>
+
+                <div class="dice-scoreboard">
+                    Score: <span id="score">0</span>
+                </div>
             </div>
 
             <div class="randomGame_borderZone">
@@ -109,6 +278,46 @@
     </div>
 
     <script src="./../Script_homepage_moonhub.js"></script>
+    <script>
+        const diceFaces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+        let totalScore = 0;
+        const dice1El = document.getElementById('dice1');
+        const dice2El = document.getElementById('dice2');
+        const rollBtn = document.getElementById('rollBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const scoreElement = document.getElementById('score');
+
+        function rollDice() {
+            rollBtn.disabled = true;
+            resetBtn.disabled = true;
+            dice1El.classList.add('is-rolling');
+            dice2El.classList.add('is-rolling');
+            let faceInterval = setInterval(() => {
+                dice1El.textContent = diceFaces[Math.floor(Math.random() * 6)];
+                dice2El.textContent = diceFaces[Math.floor(Math.random() * 6)];
+            }, 80);
+            setTimeout(() => {
+                clearInterval(faceInterval);
+                const result1 = Math.floor(Math.random() * 6) + 1;
+                const result2 = Math.floor(Math.random() * 6) + 1;
+                dice1El.textContent = diceFaces[result1 - 1];
+                dice2El.textContent = diceFaces[result2 - 1];
+                totalScore += result1 + result2;
+                scoreElement.textContent = totalScore;
+                dice1El.classList.remove('is-rolling');
+                dice2El.classList.remove('is-rolling');
+                rollBtn.disabled = false;
+                resetBtn.disabled = false;
+            }, 1000);
+        }
+
+        function resetGame() {
+            totalScore = 0;
+            scoreElement.textContent = totalScore;
+            dice1El.textContent = diceFaces[0];
+            dice2El.textContent = diceFaces[0];
+        }
+    </script>
 </body>
 
 </html>
