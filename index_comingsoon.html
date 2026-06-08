@@ -5,11 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>not ready yet</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        img {
+            width: 300px;
+            height: 300px;
+            max-width: 90vw;
+            max-height: 50vh;
+            object-fit: cover;
+        }
+        h2 {
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        @media (max-width: 500px) {
+            img {
+                width: 200px;
+                height: 200px;
+            }
+            h2 {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 
-<body style="background-color: black;">
-    <img width="300px" height="300px" src="./assets/Images/imgComingSoon.jpg">
-    <h2 style="color:white;">This game is not ready yet. please wait for it to get released</h2>
+<body>
+    <img src="./assets/Images/imgComingSoon.jpg" alt="Coming soon">
+    <h2>This game is not ready yet. please wait for it to get released</h2>
 </body>
 
 </html>

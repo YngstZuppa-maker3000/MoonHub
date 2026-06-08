@@ -93,8 +93,7 @@ body {
 .GameList_zone {
     background-color: transparent;
     width: 100%;
-    height: auto;
-    min-height: 320px;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -784,4 +783,272 @@ body {
     transform: scaleX(-1) rotate(5deg);
     opacity: 0.5;
     animation-delay: 0.2s;
+}
+
+/* ── RESPONSIVE ── */
+
+@media (max-width: 1200px) {
+    .game-grid {
+        grid-template-columns: repeat(4, 200px) !important;
+    }
+
+    .Box_Select_typeGame {
+        width: 320px;
+    }
+
+    .movement_section_zone {
+        gap: 150px;
+    }
+
+    .contenitore {
+        gap: 80px;
+    }
+
+    .RandomGame_grid {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 900px) {
+    .game-grid {
+        grid-template-columns: repeat(3, 200px) !important;
+    }
+
+    .Box_Select_typeGame {
+        width: 280px;
+    }
+
+    .movement_section_zone {
+        gap: 80px;
+    }
+
+    .contenitore {
+        gap: 40px;
+    }
+
+    #title_moonhub {
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .ButtonsMovement {
+        letter-spacing: 4px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .game-grid {
+        grid-template-columns: repeat(2, 180px) !important;
+        gap: 15px;
+    }
+
+    .Game_zone {
+        width: 180px;
+        height: 110px;
+    }
+
+    .Box_Select_typeGame {
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .contenitore {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .movement_section_zone {
+        gap: 30px;
+        height: 80px;
+    }
+
+    .ButtonsMovement {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        margin: 10px;
+        letter-spacing: 3px;
+    }
+
+    .img_logo_movement {
+        width: 40px;
+        height: 40px;
+    }
+
+    #title_moonhub {
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+
+    .RandomGame_grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .randomGame_borderZone:first-child {
+        flex-direction: row !important;
+        padding: 10px 0 !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .randomGame_borderZone:last-child {
+        flex-direction: row !important;
+        padding: 10px 0 !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .randomGame_borderZone {
+        width: auto !important;
+        height: auto !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    #like-btn, #dislike-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.4rem;
+    }
+
+    #nextgame-btn {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+
+    .info-inner {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .info-divider {
+        width: 80%;
+        height: 2px;
+        align-self: center;
+        background: linear-gradient(to right, transparent, #bc13fe, transparent);
+    }
+
+    .info-contacts, .info-review {
+        padding: 0 15px;
+        text-align: center;
+    }
+
+    .info-contacts ol {
+        text-align: left;
+        display: inline-block;
+    }
+
+    .side-menu.open {
+        width: 250px;
+    }
+
+    .side-menu .menu-link {
+        font-size: 0.9rem;
+        padding: 12px 20px;
+        letter-spacing: 2px;
+    }
+
+    #title_logo_zone {
+        height: 100px;
+        padding: 20px 0;
+    }
+
+    #img_logo {
+        width: 65px;
+        height: 65px;
+    }
+
+    #title_logo_zone #title_moonhub {
+        font-size: 1rem;
+    }
+
+    .vector-cloud {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .game-grid {
+        grid-template-columns: repeat(2, 140px) !important;
+        gap: 10px;
+    }
+
+    .Game_zone {
+        width: 140px;
+        height: 95px;
+        font-size: 0.45rem;
+        letter-spacing: 1px;
+    }
+
+    .Game_zone h5 {
+        font-size: 0.45rem;
+        padding: 3px 2px;
+        letter-spacing: 1px;
+    }
+
+    .ButtonGame {
+        font-size: 0.4rem;
+        height: 22px;
+        letter-spacing: 1px;
+    }
+
+    .movement_section_zone {
+        gap: 15px;
+        height: 60px;
+    }
+
+    .ButtonsMovement {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        margin: 5px;
+    }
+
+    .img_logo_movement {
+        width: 30px;
+        height: 30px;
+    }
+
+    #title_moonhub {
+        font-size: 0.7rem;
+        letter-spacing: 0;
+    }
+
+    .PageList_buttons {
+        gap: 5px;
+    }
+
+    .ButtonPageList {
+        width: 30px;
+        height: 30px;
+        font-size: 0.7rem;
+    }
+
+    .Info_zone {
+        font-size: 0.5rem;
+        letter-spacing: 1px;
+    }
+
+    .review-title {
+        font-size: 0.7rem;
+    }
+
+    .star {
+        font-size: 1.5rem;
+    }
+
+    .review-textarea {
+        font-size: 0.5rem;
+        max-width: 220px;
+    }
 }

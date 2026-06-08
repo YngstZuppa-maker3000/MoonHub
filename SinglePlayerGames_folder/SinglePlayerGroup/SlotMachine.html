@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./../../Style_homepage_moonhub.css">
+    <title>MOONHUB - Slot Machine</title>
+    <style>
+        body {
+            background: radial-gradient(circle at center, #1a0160 0%, #04000f 100%);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            background-color: #1a0160;
+            border: 2px solid #bc13fe;
+            border-radius: 20px;
+            padding: 35px 50px;
+            margin: 40px 0;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: pulsate 1.5s infinite alternate;
+            text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
+            position: relative;
+            z-index: 10;
+            width: auto;
+            min-width: 500px;
+            box-sizing: border-box;
+        }
+
+        .game-container h1 {
+            margin: 0 0 25px 0;
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                min-width: 0;
+                width: 90%;
+                padding: 25px 20px;
+                margin: 20px 0;
+            }
+
+            .game-container h1 {
+                font-size: 1.1rem;
+                letter-spacing: 3px;
+            }
+
+            .slot-machine {
+                gap: 10px;
+            }
+
+            .reel {
+                font-size: 44px;
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
+            }
+
+            .ssymbol {
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
+            }
+
+            .reel-label {
+                font-size: 0.5rem;
+            }
+
+            .btn-container button {
+                padding: 10px 16px;
+                font-size: 0.6rem;
+                max-width: 110px;
+            }
+
+            .slot-scoreboard {
+                font-size: 0.65rem;
+                padding: 8px 12px;
+                gap: 15px;
+            }
+
+            .slot-scoreboard div span {
+                font-size: 0.8rem;
+            }
+
+            .slot-message {
+                font-size: 0.55rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .game-container {
+                padding: 18px 12px;
+            }
+
+            .game-container h1 {
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+            }
+
+            .slot-machine {
+                gap: 6px;
+            }
+
+            .reel {
+                font-size: 32px;
+                width: 55px;
+                height: 55px;
+                line-height: 55px;
+                border-radius: 10px;
+            }
+
+            .ssymbol {
+                width: 55px;
+                height: 55px;
+                line-height: 55px;
+            }
+
+            .btn-container {
+                gap: 10px;
+                margin-top: 12px;
+            }
+
+            .btn-container button {
+                padding: 8px 10px;
+                font-size: 0.5rem;
+                max-width: 90px;
+                letter-spacing: 1px;
+            }
+
+            .slot-scoreboard {
+                font-size: 0.55rem;
+                padding: 6px 10px;
+                gap: 10px;
+                margin-top: 12px;
+            }
+
+            .slot-scoreboard div span {
+                font-size: 0.7rem;
+            }
+        }
+
+        .slot-machine {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .reel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reel-label {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            opacity: 0.8;
+        }
+
+        .reel {
+            font-size: 64px;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            background: radial-gradient(circle at 35% 35%, #0d0030, #04000f);
+            color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 0 8px #bc13fe, 0 0 25px #bc13fe, inset 0 0 20px rgba(188, 19, 254, 0.15);
+            border: 2px solid #bc13fe;
+            text-shadow: 0 0 6px #fff, 0 0 15px #bc13fe;
+            animation: pulsate 1.5s infinite alternate;
+            user-select: none;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .reel-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: none;
+        }
+
+        @keyframes spinReel {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .reel.spinning .reel-inner {
+            animation: spinReel 0.15s linear infinite;
+        }
+
+        .symbol {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            flex-shrink: 0;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 0.75rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border: 2px solid #bc13fe;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+            max-width: 160px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        #spinBtn {
+            background-color: #04000f;
+            color: #fff;
+            text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
+            animation: pulsate 1.5s infinite alternate;
+        }
+
+        #spinBtn:hover:not(:disabled) {
+            background-color: #1a0160;
+            box-shadow: 0 0 12px #bc13fe, 0 0 24px #bc13fe;
+        }
+
+        #resetBtn {
+            background-color: #04000f;
+            color: #fff;
+            text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
+            animation: pulsate 1.5s infinite alternate;
+        }
+
+        #resetBtn:hover:not(:disabled) {
+            background-color: #1a0160;
+            box-shadow: 0 0 12px #bc13fe, 0 0 24px #bc13fe;
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        button:disabled {
+            background-color: #333 !important;
+            border-color: #555 !important;
+            box-shadow: none !important;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transform: none !important;
+            animation: none !important;
+            text-shadow: none !important;
+        }
+
+        .scoreboard {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #bc13fe;
+            border-right: 4px solid #bc13fe;
+        }
+
+        .scoreboard div span {
+            font-size: 1.1rem;
+            color: #bc13fe;
+            text-shadow: 0 0 4px #fff, 0 0 11px #bc13fe;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 0.7rem;
+            min-height: 1.5em;
+            letter-spacing: 2px;
+        }
+
+        .GameList_zone {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            padding: 30px 0;
+            min-height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="sideMenu" class="side-menu">
+        <button id="closeMenuBtn" class="close-btn">&times;</button>
+        <a href="./../../Index_homepage_moonhub.html" class="menu-link">Home</a>
+        <a href="./../../SinglePlayerGames_folder/Index_SPG_page1.html" class="menu-link">Single Player Games</a>
+        <a href="./../../TwoPlayerGames_folder/Index_TPG_page1.html" class="menu-link">Two Players Games</a>
+        <a href="./../../RandomGames_folder/Index_RG.html" class="menu-link">Random Games</a>
+    </div>
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <div class="movement_section_zone">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="cloud cloud-5"></div>
+
+        <img class="vector-cloud vc-l1" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-l2" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-l3" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <button id="btnMovementSPG" class="ButtonsMovement"> ||| </button>
+        <h1 id="title_moonhub">MOONHUB</h1>
+        <img class="img_logo_movement" src="./../../assets/Images/Logo_moonhub.jpg" alt="Logo_moonhub">
+
+        <img class="vector-cloud vc-r1" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-r2" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-r3" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+    </div>
+
+    <div class="GameList_zone">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="cloud cloud-5"></div>
+
+        <div class="game-container">
+            <h1>Slot Machine</h1>
+
+            <div class="slot-machine">
+                <div class="reel-container">
+                    <span class="reel-label">Reel 1</span>
+                    <div id="reel1" class="reel">
+                        <div class="reel-inner"></div>
+                    </div>
+                </div>
+                <div class="reel-container">
+                    <span class="reel-label">Reel 2</span>
+                    <div id="reel2" class="reel">
+                        <div class="reel-inner"></div>
+                    </div>
+                </div>
+                <div class="reel-container">
+                    <span class="reel-label">Reel 3</span>
+                    <div id="reel3" class="reel">
+                        <div class="reel-inner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <button id="spinBtn" onclick="spin()">Spin</button>
+                <button id="resetBtn" onclick="resetGame()">Reset</button>
+            </div>
+
+            <div class="scoreboard">
+                <div>Credits: <span id="credits">300</span></div>
+                <div>Bet: <span id="bet">10</span></div>
+            </div>
+
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <div class="Info_zone">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+
+        <div class="info-inner">
+            <div class="info-contacts">
+                <p>For information, contact the following operators:</p>
+                <ol>
+                    <li>
+                        Yngst_thaZuppa:
+                        <ul>
+                            <li>Email: <a href="https://mail.google.com/mail/?view=cm&to=lazuppabagnata68@gmail.com"
+                                    target="_blank" rel="noopener noreferrer">lazuppabagnata68@gmail.com</a></li>
+                            <li>GitHub: <a href="https://github.com/YngstZuppa-maker3000">YngstZuppa-maker3000</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        Elvettorato:
+                        <ul>
+                            <li>Email: <a href="https://mail.google.com/mail/?view=cm&to=gabrlgithub.xda@gmail.com"
+                                    target="_blank" rel="noopener noreferrer">gabrlgithub.xda@gmail.com</a></li>
+                            <li>GitHub: <a href="https://github.com/Elvettorato">Elvettorato</a></li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="info-divider"></div>
+
+            <div class="info-review">
+                <p class="review-title">Leave a Review</p>
+                <div class="stars" id="starRating" role="group" aria-label="Star rating">
+                    <span class="star" data-value="1" id="star1" title="1 stella">&#9733;</span>
+                    <span class="star" data-value="2" id="star2" title="2 stelle">&#9733;</span>
+                    <span class="star" data-value="3" id="star3" title="3 stelle">&#9733;</span>
+                    <span class="star" data-value="4" id="star4" title="4 stelle">&#9733;</span>
+                    <span class="star" data-value="5" id="star5" title="5 stelle">&#9733;</span>
+                </div>
+                <textarea id="reviewNote" class="review-textarea" placeholder="Add a note..."></textarea>
+                <button id="btnSendReview" class="review-send-btn">Send &#10148;</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./../../Script_homepage_moonhub.js"></script>
+    <script>
+        const symbols = ['🍒', '🍋', '🍊', '🍇', '💎', '7️⃣', '⭐', '🔔'];
+        const payouts = {
+            '🍒🍒🍒': 40,
+            '🍋🍋🍋': 50,
+            '🍊🍊🍊': 60,
+            '🍇🍇🍇': 80,
+            '💎💎💎': 120,
+            '7️⃣7️⃣7️⃣': 200,
+            '⭐⭐⭐': 150,
+            '🔔🔔🔔': 100,
+            '🍒🍒': 5,
+            '🍋🍋': 8,
+            '🍊🍊': 10,
+            '🍇🍇': 15,
+            '💎💎': 25,
+        };
+
+        let credits = 300;
+        const bet = 10;
+
+        const reelEls = [
+            document.getElementById('reel1'),
+            document.getElementById('reel2'),
+            document.getElementById('reel3')
+        ];
+        const spinBtn = document.getElementById('spinBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const creditsEl = document.getElementById('credits');
+        const messageEl = document.getElementById('message');
+
+        function buildReelContent(reelEl) {
+            const inner = reelEl.querySelector('.reel-inner');
+            inner.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                const sym = symbols[Math.floor(Math.random() * symbols.length)];
+                const div = document.createElement('div');
+                div.className = 'symbol';
+                div.textContent = sym;
+                inner.appendChild(div);
+            }
+            reelEl.dataset.result = inner.children[1].textContent;
+        }
+
+        function initReels() {
+            reelEls.forEach(el => buildReelContent(el));
+        }
+
+        function getResults() {
+            return reelEls.map(el => el.dataset.result);
+        }
+
+        function checkWin(results) {
+            const line = results.join('');
+            if (payouts[line]) return payouts[line];
+            for (const key in payouts) {
+                if (key.length === 2 && line.startsWith(key)) return payouts[key];
+            }
+            return 0;
+        }
+
+        function spin() {
+            if (credits < bet) {
+                messageEl.textContent = 'NOT ENOUGH CREDITS!';
+                return;
+            }
+
+            credits -= bet;
+            creditsEl.textContent = credits;
+            spinBtn.disabled = true;
+            resetBtn.disabled = true;
+            messageEl.textContent = '';
+
+            reelEls.forEach((el, i) => {
+                const inner = el.querySelector('.reel-inner');
+                inner.innerHTML = '';
+                for (let j = 0; j < 5; j++) {
+                    const sym = symbols[Math.floor(Math.random() * symbols.length)];
+                    const div = document.createElement('div');
+                    div.className = 'symbol';
+                    div.textContent = sym;
+                    inner.appendChild(div);
+                }
+                el.classList.add('spinning');
+            });
+
+            const spinDuration = 1500;
+            const stopDelays = [300, 600, 900];
+
+            reelEls.forEach((el, i) => {
+                setTimeout(() => {
+                    el.classList.remove('spinning');
+                    const inner = el.querySelector('.reel-inner');
+                    const finalSym = symbols[Math.floor(Math.random() * symbols.length)];
+                    inner.innerHTML = '';
+                    for (let j = 0; j < 3; j++) {
+                        const div = document.createElement('div');
+                        div.className = 'symbol';
+                        if (j === 1) {
+                            div.textContent = finalSym;
+                        } else {
+                            div.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                        }
+                        inner.appendChild(div);
+                    }
+                    el.dataset.result = finalSym;
+                }, stopDelays[i]);
+            });
+
+            setTimeout(() => {
+                const results = getResults();
+                const win = checkWin(results);
+                if (win > 0) {
+                    credits += win;
+                    creditsEl.textContent = credits;
+                    messageEl.textContent = `YOU WIN ${win} CREDITS!`;
+                } else {
+                    messageEl.textContent = 'No win, try again!';
+                }
+                spinBtn.disabled = false;
+                resetBtn.disabled = false;
+            }, spinDuration);
+        }
+
+        function resetGame() {
+            credits = 100;
+            creditsEl.textContent = credits;
+            messageEl.textContent = '';
+            initReels();
+        }
+
+        initReels();
+    </script>
+</body>
+</html>
