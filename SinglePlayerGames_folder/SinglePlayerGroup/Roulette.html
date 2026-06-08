@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./../../Style_homepage_moonhub.css">
+    <title>MOONHUB - Roulette</title>
+    <style>
+        body {
+            background: radial-gradient(circle at center, #1a0160 0%, #04000f 100%);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            background-color: #1a0160;
+            border: 2px solid #bc13fe;
+            border-radius: 20px;
+            padding: 30px 40px;
+            margin: 30px 0;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: pulsate 1.5s infinite alternate;
+            text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
+            position: relative;
+            z-index: 10;
+            width: auto;
+            min-width: 520px;
+            box-sizing: border-box;
+        }
+
+        .game-container h1 {
+            margin: 0 0 20px 0;
+            font-size: 1.4rem;
+            letter-spacing: 5px;
+        }
+
+        .wheel-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .wheel-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .pointer {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            z-index: 20;
+            filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #bc13fe);
+            line-height: 1;
+        }
+
+        #wheelCanvas {
+            display: block;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #bc13fe, 0 0 40px #bc13fe, inset 0 0 20px rgba(188, 19, 254, 0.2);
+            border: 3px solid #bc13fe;
+        }
+
+        .bet-area {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .bet-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            opacity: 0.8;
+        }
+
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .num-btn {
+            padding: 8px 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            font-weight: bold;
+            border: 2px solid #bc13fe;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #04000f;
+            color: #fff;
+            text-shadow: 0 0 4px #fff, 0 0 10px #bc13fe;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .num-btn:hover:not(:disabled) {
+            background-color: #1a0160;
+            box-shadow: 0 0 10px #bc13fe;
+        }
+
+        .num-btn.selected {
+            background-color: #bc13fe;
+            box-shadow: 0 0 15px #bc13fe, 0 0 30px #bc13fe;
+            color: #fff;
+        }
+
+        .num-btn.green { border-color: #2ecc71; color: #2ecc71; text-shadow: 0 0 4px #2ecc71; }
+        .num-btn.red { border-color: #e74c3c; color: #e74c3c; text-shadow: 0 0 4px #e74c3c; }
+        .num-btn.black { border-color: #888; color: #ccc; }
+        .num-btn.green.selected { background-color: #2ecc71; border-color: #2ecc71; color: #fff; }
+        .num-btn.red.selected { background-color: #e74c3c; border-color: #e74c3c; color: #fff; }
+        .num-btn.black.selected { background-color: #555; border-color: #fff; color: #fff; }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .btn-container button {
+            padding: 12px 28px;
+            font-size: 0.7rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border: 2px solid #bc13fe;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+            max-width: 140px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        #spinRouletteBtn {
+            background-color: #04000f;
+            color: #fff;
+            text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
+            animation: pulsate 1.5s infinite alternate;
+        }
+
+        #spinRouletteBtn:hover:not(:disabled) {
+            background-color: #1a0160;
+            box-shadow: 0 0 12px #bc13fe, 0 0 24px #bc13fe;
+        }
+
+        #resetRouletteBtn {
+            background-color: #04000f;
+            color: #fff;
+            text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe;
+            animation: pulsate 1.5s infinite alternate;
+        }
+
+        #resetRouletteBtn:hover:not(:disabled) {
+            background-color: #1a0160;
+            box-shadow: 0 0 12px #bc13fe, 0 0 24px #bc13fe;
+        }
+
+        .btn-container button:active:not(:disabled) {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .btn-container button:disabled {
+            background-color: #333 !important;
+            border-color: #555 !important;
+            box-shadow: none !important;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transform: none !important;
+            animation: none !important;
+            text-shadow: none !important;
+        }
+
+        .roulette-scoreboard {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            font-size: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #bc13fe;
+            border-right: 4px solid #bc13fe;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        .roulette-scoreboard div span {
+            font-size: 1rem;
+            color: #bc13fe;
+            text-shadow: 0 0 4px #fff, 0 0 11px #bc13fe;
+        }
+
+        .roulette-message {
+            margin-top: 10px;
+            font-size: 0.7rem;
+            min-height: 1.5em;
+            letter-spacing: 2px;
+        }
+
+        .win-highlight {
+            animation: winPulse 0.5s ease-in-out 3;
+        }
+
+        @keyframes winPulse {
+            0%, 100% { text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 40px #bc13fe, 0 0 80px #bc13fe; }
+            50% { text-shadow: 0 0 10px #fff, 0 0 30px #bc13fe, 0 0 60px #bc13fe, 0 0 100px #bc13fe; }
+        }
+
+        .GameList_zone {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            padding: 30px 0;
+            min-height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                min-width: 0;
+                width: 90%;
+                padding: 20px 15px;
+                margin: 15px 0;
+            }
+
+            .game-container h1 {
+                font-size: 1rem;
+                letter-spacing: 3px;
+                margin-bottom: 12px;
+            }
+
+            #wheelCanvas {
+                width: 280px !important;
+                height: 280px !important;
+            }
+
+            .pointer {
+                font-size: 22px;
+                top: -12px;
+            }
+
+            .number-grid {
+                max-width: 320px;
+                gap: 4px;
+            }
+
+            .num-btn {
+                font-size: 0.55rem;
+                padding: 6px 0;
+            }
+
+            .btn-container button {
+                padding: 10px 16px;
+                font-size: 0.6rem;
+                max-width: 110px;
+            }
+
+            .roulette-scoreboard {
+                font-size: 0.65rem;
+                padding: 8px 12px;
+                gap: 15px;
+                max-width: 320px;
+            }
+
+            .roulette-scoreboard div span {
+                font-size: 0.8rem;
+            }
+
+            .roulette-message {
+                font-size: 0.6rem;
+            }
+
+            .bet-label {
+                font-size: 0.55rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .game-container {
+                padding: 14px 10px;
+            }
+
+            .game-container h1 {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+
+            #wheelCanvas {
+                width: 220px !important;
+                height: 220px !important;
+            }
+
+            .pointer {
+                font-size: 18px;
+                top: -10px;
+            }
+
+            .number-grid {
+                max-width: 260px;
+                gap: 3px;
+            }
+
+            .num-btn {
+                font-size: 0.45rem;
+                padding: 4px 0;
+                border-radius: 5px;
+            }
+
+            .btn-container {
+                gap: 10px;
+            }
+
+            .btn-container button {
+                padding: 8px 12px;
+                font-size: 0.5rem;
+                max-width: 85px;
+                letter-spacing: 1px;
+            }
+
+            .roulette-scoreboard {
+                font-size: 0.55rem;
+                padding: 6px 8px;
+                gap: 10px;
+                max-width: 260px;
+            }
+
+            .roulette-scoreboard div span {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="sideMenu" class="side-menu">
+        <button id="closeMenuBtn" class="close-btn">&times;</button>
+        <a href="./../../Index_homepage_moonhub.html" class="menu-link">Home</a>
+        <a href="./../../SinglePlayerGames_folder/Index_SPG_page1.html" class="menu-link">Single Player Games</a>
+        <a href="./../../TwoPlayerGames_folder/Index_TPG_page1.html" class="menu-link">Two Players Games</a>
+        <a href="./../../RandomGames_folder/Index_RG.html" class="menu-link">Random Games</a>
+    </div>
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <div class="movement_section_zone">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="cloud cloud-5"></div>
+
+        <img class="vector-cloud vc-l1" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-l2" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-l3" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <button id="btnMovementSPG" class="ButtonsMovement"> ||| </button>
+        <h1 id="title_moonhub">MOONHUB</h1>
+        <img class="img_logo_movement" src="./../../assets/Images/Logo_moonhub.jpg" alt="Logo_moonhub">
+
+        <img class="vector-cloud vc-r1" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-r2" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+        <img class="vector-cloud vc-r3" src="./../../assets/Images/NeonCloud.svg" alt="Cloud">
+    </div>
+
+    <div class="GameList_zone">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="cloud cloud-5"></div>
+
+        <div class="game-container">
+            <h1>Roulette</h1>
+
+            <div class="wheel-section">
+                <div class="wheel-wrapper">
+                    <div class="pointer">▼</div>
+                    <canvas id="wheelCanvas" width="360" height="360"></canvas>
+                </div>
+            </div>
+
+            <div class="bet-area">
+                <span class="bet-label">Pick a number</span>
+                <div class="number-grid" id="numGrid"></div>
+            </div>
+
+            <div class="btn-container">
+                <button id="spinRouletteBtn" onclick="spinRoulette()">Spin</button>
+                <button id="resetRouletteBtn" onclick="resetRoulette()">Reset</button>
+            </div>
+
+            <div class="roulette-scoreboard">
+                <div>Credits: <span id="rouletteCredits">200</span></div>
+                <div>Bet: <span id="rouletteBet">10</span></div>
+            </div>
+
+            <div id="rouletteMsg" class="roulette-message"></div>
+        </div>
+    </div>
+
+    <div class="Info_zone">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+
+        <div class="info-inner">
+            <div class="info-contacts">
+                <p>For information, contact the following operators:</p>
+                <ol>
+                    <li>
+                        Yngst_thaZuppa:
+                        <ul>
+                            <li>Email: <a href="https://mail.google.com/mail/?view=cm&to=lazuppabagnata68@gmail.com"
+                                    target="_blank" rel="noopener noreferrer">lazuppabagnata68@gmail.com</a></li>
+                            <li>GitHub: <a href="https://github.com/YngstZuppa-maker3000">YngstZuppa-maker3000</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        Elvettorato:
+                        <ul>
+                            <li>Email: <a href="https://mail.google.com/mail/?view=cm&to=gabrlgithub.xda@gmail.com"
+                                    target="_blank" rel="noopener noreferrer">gabrlgithub.xda@gmail.com</a></li>
+                            <li>GitHub: <a href="https://github.com/Elvettorato">Elvettorato</a></li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="info-divider"></div>
+
+            <div class="info-review">
+                <p class="review-title">Leave a Review</p>
+                <div class="stars" id="starRating" role="group" aria-label="Star rating">
+                    <span class="star" data-value="1" id="star1" title="1 stella">&#9733;</span>
+                    <span class="star" data-value="2" id="star2" title="2 stelle">&#9733;</span>
+                    <span class="star" data-value="3" id="star3" title="3 stelle">&#9733;</span>
+                    <span class="star" data-value="4" id="star4" title="4 stelle">&#9733;</span>
+                    <span class="star" data-value="5" id="star5" title="5 stelle">&#9733;</span>
+                </div>
+                <textarea id="reviewNote" class="review-textarea" placeholder="Add a note..."></textarea>
+                <button id="btnSendReview" class="review-send-btn">Send &#10148;</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./../../Script_homepage_moonhub.js"></script>
+    <script>
+        const wheelNumbers = [
+            0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5,
+            24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26
+        ];
+
+        function getColor(n) {
+            if (n === 0) return '#2ecc71';
+            const reds = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
+            return reds.includes(n) ? '#e74c3c' : '#ddd';
+        }
+
+        let credits = 200;
+        const bet = 10;
+        let selectedNumber = null;
+        let isSpinning = false;
+
+        const canvas = document.getElementById('wheelCanvas');
+        const ctx = canvas.getContext('2d');
+        const total = wheelNumbers.length;
+        const arc = (2 * Math.PI) / total;
+
+        let currentAngle = 0;
+
+        function drawWheel(angle) {
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const r = canvas.width / 2 - 4;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < total; i++) {
+                const startAngle = angle + i * arc;
+                const endAngle = startAngle + arc;
+                const num = wheelNumbers[i];
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, r, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = getColor(num);
+                ctx.fill();
+                ctx.strokeStyle = '#1a0160';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                const midAngle = startAngle + arc / 2;
+                const textR = r * 0.68;
+                ctx.save();
+                ctx.translate(cx + Math.cos(midAngle) * textR, cy + Math.sin(midAngle) * textR);
+                ctx.rotate(midAngle + Math.PI / 2);
+                ctx.fillStyle = num === 0 ? '#fff' : (getColor(num) === '#e74c3c' ? '#fff' : '#1a0160');
+                ctx.font = 'bold 12px Orbitron, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(num.toString(), 0, 0);
+                ctx.restore();
+            }
+
+            ctx.beginPath();
+            ctx.arc(cx, cy, r * 0.14, 0, 2 * Math.PI);
+            ctx.fillStyle = '#04000f';
+            ctx.fill();
+            ctx.strokeStyle = '#bc13fe';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        function createNumberGrid() {
+            const grid = document.getElementById('numGrid');
+            for (let i = 0; i <= 36; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'num-btn';
+                if (i === 0) btn.classList.add('green');
+                else if (getColor(i) === '#e74c3c') btn.classList.add('red');
+                else btn.classList.add('black');
+                btn.textContent = i;
+                btn.dataset.num = i;
+                btn.onclick = function() {
+                    if (isSpinning) return;
+                    document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedNumber = parseInt(this.dataset.num);
+                };
+                grid.appendChild(btn);
+            }
+        }
+
+        function spinRoulette() {
+            if (isSpinning) return;
+            if (selectedNumber === null) {
+                document.getElementById('rouletteMsg').textContent = 'Pick a number first!';
+                return;
+            }
+            if (credits < bet) {
+                document.getElementById('rouletteMsg').textContent = 'NOT ENOUGH CREDITS!';
+                return;
+            }
+
+            credits -= bet;
+            document.getElementById('rouletteCredits').textContent = credits;
+            isSpinning = true;
+            document.getElementById('spinRouletteBtn').disabled = true;
+            document.getElementById('resetRouletteBtn').disabled = true;
+            document.getElementById('rouletteMsg').textContent = '';
+
+            const result = Math.floor(Math.random() * 37);
+            const resultIndex = wheelNumbers.indexOf(result);
+            const targetAngle = currentAngle + (Math.PI * 2 * (5 + Math.random() * 3)) - (resultIndex * arc);
+            const startAngle = currentAngle;
+            const totalRotation = targetAngle - startAngle;
+            const duration = 3000;
+            const startTime = performance.now();
+
+            function animate(now) {
+                const elapsed = now - startTime;
+                const t = Math.min(elapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - t, 3);
+                currentAngle = startAngle + totalRotation * ease;
+                drawWheel(currentAngle);
+
+                if (t < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    currentAngle = targetAngle;
+                    drawWheel(currentAngle);
+                    const win = result === selectedNumber;
+                    const msgEl = document.getElementById('rouletteMsg');
+                    const creditsEl = document.getElementById('rouletteCredits');
+                    if (win) {
+                        const winAmount = bet * 36;
+                        credits += winAmount;
+                        creditsEl.textContent = credits;
+                        msgEl.textContent = 'JACKPOT! WIN ' + winAmount + ' CREDITS!';
+                        msgEl.classList.add('win-highlight');
+                    } else {
+                        msgEl.textContent = 'Landed on ' + result + '. Better luck next time!';
+                        msgEl.classList.remove('win-highlight');
+                    }
+                    isSpinning = false;
+                    document.getElementById('spinRouletteBtn').disabled = false;
+                    document.getElementById('resetRouletteBtn').disabled = false;
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        function resetRoulette() {
+            credits = 200;
+            document.getElementById('rouletteCredits').textContent = credits;
+            document.getElementById('rouletteMsg').textContent = '';
+            document.getElementById('rouletteMsg').classList.remove('win-highlight');
+            selectedNumber = null;
+            document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('selected'));
+        }
+
+        createNumberGrid();
+        drawWheel(0);
+    </script>
+</body>
+</html>
